@@ -117,5 +117,5 @@ def print_shortest_paths(graph, edge_weights, meta, source=None):
 
 
 if __name__ == "__main__":
-    graph, edge_weights, meta = build_graph("graphs/four.txt")
+    graph, edge_weights, meta = build_graph("graphs/one.txt")
     print_shortest_paths(graph, edge_weights, meta)
