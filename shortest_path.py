@@ -4,7 +4,7 @@ ITCS 6114
 Project 2: Graph Algorithms
 """
 
-from build_graph import build_graph
+from utils.build_graph import build_graph
 
 
 def relax(u, v, edge_weights, distances, predecessors, directed):

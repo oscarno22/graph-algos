@@ -52,7 +52,7 @@ def build_graph(file_path: str):
     return graph, edge_weights, meta
 
 if __name__ == "__main__":
-    graph, edge_weights, meta = build_graph('graphs/three.txt')
+    graph, edge_weights, meta = build_graph('../graphs/three.txt')
     print("GRAPH")
     print(graph)
     print("EDGE WEIGHTS")
