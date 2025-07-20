@@ -1,0 +1,10 @@
+9 8 D
+D G 1
+F I 3
+A B 2
+A D 7
+G H 4
+B C 4
+B E 3
+E F 2
+source : A

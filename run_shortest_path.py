@@ -135,5 +135,5 @@ def analyze_graph_and_visualize(graph_file):
 
 if __name__ == "__main__":
     # analyze graph and visualize results
-    graph_file = "graphs/four.txt"
+    graph_file = "graphs/one.txt"
     analyze_graph_and_visualize(graph_file)

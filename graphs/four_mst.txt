@@ -1,8 +1,10 @@
-7 6 U
-B C 1
-C E 2
+9 8 U
 D E 1
+D B 4
 E F 3
-A B 2
-F G 2
+E G 4
+B C 2
+B A 3
+F H 2
+H I 3
 source : A

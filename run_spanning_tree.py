@@ -9,40 +9,28 @@ from utils import build_graph, visualize_graph
 
 
 def write_mst_to_file(mst_graph, mst_weights, meta, source, file_path):
-    """Writes MST to file in graph format."""
+    """Writes MST to file in the original graph format."""
 
-    # count edges (divide by 2 since undirected)
     num_edges = sum(len(neighbors) for neighbors in mst_graph.values()) // 2
+    num_vertices = len(mst_graph)
 
-    # get all vertices
-    vertices = set()
-    for u in mst_graph:
-        vertices.add(u)
-        for v in mst_graph[u]:
-            vertices.add(v)
+    with open(file_path, "w") as f:
+        f.write(f"{num_vertices} {num_edges} U\n")
+        written = set()
 
-    num_vertices = len(vertices)
-
-    with open(file_path, "w") as file:
-        # write header: vertices, edges, undirected
-        file.write(f"{num_vertices} {num_edges} U\n")
-
-        # write edges (avoid duplicates)
-        written_edges = set()
         for u in mst_graph:
             for v in mst_graph[u]:
-                if u < v:  # avoid duplicate edges
-                    weight_key = f"{u}{v}"
-                    weight = mst_weights.get(weight_key, 1)
-                    file.write(f"{u} {v} {weight}\n")
-                    written_edges.add((u, v))
+                if (u, v) not in written and (v, u) not in written:
+                    key = f"{u}{v}" if u < v else f"{v}{u}"
+                    weight = mst_weights.get(key, 1)
+                    f.write(f"{u} {v} {weight}\n")
+                    written.add((u, v))
 
-        # write source
-        file.write(f"source : {source}\n")
+        f.write(f"source : {source}\n")
 
 
 def print_mst(graph, edge_weights, meta, source=None):
-    """Prints minimum spanning tree and returns tree structure."""
+    """Prints and builds the MST using Kruskal's algorithm."""
 
     if source is None:
         source = meta.get("source", list(graph.keys())[0])
@@ -53,37 +41,28 @@ def print_mst(graph, edge_weights, meta, source=None):
     print("\nMinimum Spanning Tree:")
     print("=" * 40)
     print(f"Total cost: {total_cost}")
-    print("Edges in MST:")
-
     for u, v, weight in mst_edges:
         print(f"  {u} -- {v} : {weight}")
 
-    # build MST graph structure
     mst_graph, mst_weights = build_mst_graph(mst_edges)
-
     return mst_edges, total_cost, mst_graph, mst_weights
 
 
 def analyze_mst_and_visualize(graph_file):
-    """Main function to analyze graph, build MST, and visualize results."""
+    """Main workflow: load graph, run MST, write and visualize results."""
 
     print(f"Loading graph from {graph_file}...")
     graph, edge_weights, meta = build_graph(graph_file)
 
-    # ensure graph is undirected
     if meta["directed"]:
-        print("Warning: MST algorithm requires undirected graph")
+        print("Warning: MST algorithm requires undirected graph.")
         return
 
     print("\nOriginal Graph Analysis:")
     print("=" * 40)
-
-    # print graph info
-    vertices = set()
-    for u in graph:
-        vertices.add(u)
-        for v in graph[u]:
-            vertices.add(v)
+    vertices = set(graph.keys())
+    for neighbors in graph.values():
+        vertices.update(neighbors)
 
     total_edges = sum(len(neighbors) for neighbors in graph.values()) // 2
     total_weight = sum(edge_weights.values())
@@ -92,39 +71,33 @@ def analyze_mst_and_visualize(graph_file):
     print(f"Edges: {total_edges}")
     print(f"Total weight of all edges: {total_weight}")
 
-    # compute MST
     mst_edges, total_cost, mst_graph, mst_weights = print_mst(graph, edge_weights, meta)
 
     if mst_graph:
         print("\nMST Statistics:")
         print("=" * 40)
+        print(f"MST edges: {len(mst_edges)}")
+        print(f"MST vertices: {len(mst_graph)}")
+        print(
+            f"Weight reduction: {total_weight - total_cost} "
+            f"({((total_weight - total_cost) / total_weight) * 100:.1f}%)"
+        )
 
-        # write MST to file
-        mst_file = f"graphs/{graph_file.split('/')[-1].replace('.txt', '_mst.txt')}"
         source = meta.get("source", list(graph.keys())[0])
+        mst_file = f"graphs/{graph_file.split('/')[-1].replace('.txt', '_mst.txt')}"
         write_mst_to_file(mst_graph, mst_weights, meta, source, mst_file)
 
         print(f"MST written to {mst_file}")
-        print(f"MST edges: {len(mst_edges)}")
-        print(
-            f"MST vertices: {len(set(u for u, v, w in mst_edges).union(set(v for u, v, w in mst_edges)))}"
-        )
-        print(
-            f"Weight reduction: {total_weight - total_cost} ({((total_weight - total_cost) / total_weight * 100):.1f}%)"
-        )
 
-        # visualize original graph
         print(f"\nVisualizing original graph from {graph_file}...")
         visualize_graph(graph_file)
 
-        # visualize MST
         print(f"Visualizing MST from {mst_file}...")
         visualize_graph(mst_file)
     else:
-        print("Error: Could not build MST")
+        print("Error: Could not build MST.")
 
 
 if __name__ == "__main__":
-    # analyze graph and visualize MST
-    graph_file = "graphs/four.txt"
+    graph_file = "graphs/six.txt"
     analyze_mst_and_visualize(graph_file)

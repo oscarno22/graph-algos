@@ -1,0 +1,14 @@
+9 12 U
+A B 4
+A C 6
+B D 2
+B E 5
+C E 3
+C F 7
+D G 4
+E G 1
+E H 6
+F H 2
+G I 3
+H I 4
+source : A

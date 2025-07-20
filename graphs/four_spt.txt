@@ -1,8 +1,10 @@
-7 6 D
-B E 3
-B C 1
+9 8 D
+H I 3
+A B 3
+A C 5
+E G 4
 E F 3
-E D 1
-F G 2
-A B 2
+D E 1
+B D 4
+F H 2
 source : A
