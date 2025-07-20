@@ -27,6 +27,34 @@ project_2/
     └── four.txt             # Complex undirected graph
 ```
 
+## Graph File Format
+
+The graph text files follow a standardized format:
+
+```
+<num_vertices> <num_edges> <graph_type>
+<vertex1> <vertex2> <weight>
+<vertex1> <vertex2> <weight>
+...
+source : <source_vertex>
+```
+
+**Format Details:**
+- **Header line:** Number of vertices, number of edges, and graph type (`U` for undirected, `D` for directed)
+- **Edge lines:** Each line specifies an edge with two vertices and the weight between them
+- **Source line:** Specifies the source vertex for shortest path calculations
+
+**Example:**
+```
+6 10 U
+A B 1
+A C 2
+B C 1
+source : A
+```
+
+This represents an undirected graph with 6 vertices and 10 edges, where vertex A is the source for shortest path calculations.
+
 ## Dependencies
 
 Install required dependencies:
