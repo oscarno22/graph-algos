@@ -99,8 +99,6 @@ python run_shortest_path.py
 
 # Run minimum spanning tree analysis
 python run_spanning_tree.py
-
-# Change graph files in main sections to test different cases
 ```
 
 ### Sample Test Cases
