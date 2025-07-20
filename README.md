@@ -1,8 +1,8 @@
-# Graph Algorithms Project
+# Project 2
 
 **Author:** Oscar Nolen  
 **Course:** ITCS 6114  
-**Project:** Project 2: Graph Algorithms
+**Project:** Graph Algorithms
 
 ## Overview
 
