@@ -6,7 +6,7 @@ Project 2: Graph Algorithms
 
 import matplotlib.pyplot as plt
 import networkx as nx
-from build_graph import build_graph
+from .build_graph import build_graph
 
 
 def visualize_graph(file_path):
@@ -44,14 +44,21 @@ def visualize_graph(file_path):
     nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=800)
 
     # draw edges
-    nx.draw_networkx_edges(
-        G,
-        pos,
-        edge_color="gray",
-        arrows=meta["directed"],
-        arrowsize=20,
-        arrowstyle="->",
-    )
+    if meta["directed"]:
+        nx.draw_networkx_edges(
+            G,
+            pos,
+            edge_color="gray",
+            arrows=True,
+            arrowsize=20,
+            arrowstyle="->",
+        )
+    else:
+        nx.draw_networkx_edges(
+            G,
+            pos,
+            edge_color="gray",
+        )
 
     # draw labels
     nx.draw_networkx_labels(G, pos, font_size=12, font_weight="bold")

@@ -4,9 +4,6 @@ ITCS 6114
 Project 2: Graph Algorithms
 """
 
-from utils.build_graph import build_graph
-
-
 def relax(u, v, edge_weights, distances, predecessors, directed):
     """Relaxes edge (u, v) if a shorter path is found."""
 
@@ -80,42 +77,3 @@ def get_path(predecessors, source, target):
         return None
 
     return path
-
-
-def print_shortest_paths(graph, edge_weights, meta, source=None):
-    """Prints shortest path tree from source vertex."""
-
-    if source is None:
-        source = meta.get("source")
-
-    if source is None:
-        print("Error: No source vertex specified")
-        return
-
-    distances, predecessors, negative_cycle = bellman_ford(
-        graph, edge_weights, source, meta
-    )
-
-    if negative_cycle:
-        print("WARNING: Negative cycle detected!")
-        print()
-
-    print(f"Shortest paths from {source}:")
-    vertices = sorted(distances.keys())
-
-    for vertex in vertices:
-        if vertex == source:
-            print(f"{vertex}: 0 ({vertex})")
-        elif distances[vertex] == float("inf"):
-            print(f"{vertex}: ∞ (no path)")
-        else:
-            path = get_path(predecessors, source, vertex)
-            path_str = " -> ".join(path) if path else "no path"
-            print(f"{vertex}: {distances[vertex]} ({path_str})")
-
-    return distances, predecessors, negative_cycle
-
-
-if __name__ == "__main__":
-    graph, edge_weights, meta = build_graph("graphs/one.txt")
-    print_shortest_paths(graph, edge_weights, meta)

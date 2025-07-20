@@ -1,0 +1,7 @@
+6 5 D
+A C 2
+A B 1
+C D 1
+B E 2
+D F 3
+source : A
