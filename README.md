@@ -105,10 +105,12 @@ python run_spanning_tree.py
 
 ### Sample Test Cases
 
-1. **one.txt**: 6-vertex undirected graph, good for basic testing
-2. **two.txt**: 4-vertex directed graph with cycles (shortest path only)
-3. **three.txt**: 6-vertex directed graph with multiple paths (shortest path only)
-4. **four.txt**: 7-vertex undirected graph with varied weights
+1. **one.txt**: 6-vertex undirected graph with 10 edges, good for basic testing
+2. **two.txt**: 7-vertex directed graph with 15 edges and cycles (shortest path only)
+3. **three.txt**: 7-vertex directed graph with 15 edges and multiple paths (shortest path only)
+4. **four.txt**: 9-vertex undirected graph with 12 edges and varied weights
+5. **five.txt**: 9-vertex undirected graph with 12 edges, alternative topology
+6. **six.txt**: 9-vertex undirected graph with 12 edges, different connectivity pattern
 
 ### Expected Output Format
 
