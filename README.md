@@ -6,30 +6,35 @@
 
 ## Overview
 
-This project implements the Bellman-Ford algorithm for finding shortest paths in weighted graphs. The implementation supports both directed and undirected graphs, builds shortest path trees, and includes visualization capabilities.
+This project implements graph algorithms for shortest paths and minimum spanning trees. It includes the Bellman-Ford algorithm for shortest paths and Kruskal's algorithm for minimum spanning trees, with visualization capabilities for both.
 
 ## Project Structure
 
 ```
 project_2/
-├── run_shortest_path.py          # Main program for shortest-path tree
+├── run_shortest_path.py     # Main program for shortest-path tree
+├── run_spanning_tree.py     # Main program for minimum spanning tree
+├── algorithms/
+│   ├── shortest_path.py     # Bellman-Ford algorithm
+│   └── spanning_tree.py     # Kruskal's algorithm
 ├── utils/
-│   ├── build_graph.py        # Graph parsing from text files
-│   └── visualize_graph.py    # Graph visualization tools
+│   ├── build_graph.py       # Graph parsing from text files
+│   └── visualize_graph.py   # Graph visualization tools
 └── graphs/
     ├── one.txt              # Sample undirected graph
     ├── two.txt              # Sample directed graph
     ├── three.txt            # Complex directed graph
     └── four.txt             # Complex undirected graph
-└── algorithms/
-    ├── shortest_path.py     # Bellman-Ford algorithm
-    └── spanning_tree.py     # Prim's algorithm
 ```
 
 ## Dependencies
 
 Install required dependencies:
 ```bash
+# create venv, activate
+python3 -m venv .venv
+source .venv/bin/activate
+
 pip install matplotlib networkx
 ```
 
@@ -37,54 +42,69 @@ pip install matplotlib networkx
 
 ### Bellman-Ford Algorithm
 
-The Bellman-Ford algorithm finds shortest paths from a single source vertex to all other vertices in a weighted graph. Key features of this implementation:
+The Bellman-Ford algorithm finds shortest paths from a single source vertex to all other vertices in a weighted graph.
+
+### Kruskal's Algorithm
+
+Kruskal's algorithm finds the minimum spanning tree of an undirected weighted graph using a greedy approach with Union-Find data structure.
 
 ### Core Functions
 
+**Shortest Path Functions:**
 - `bellman_ford()`: Main algorithm implementation
 - `relax()`: Edge relaxation helper function  
 - `get_path()`: Path reconstruction from predecessors
 - `print_shortest_paths()`: Formatted output and shortest path tree generation
-- `build_shortest_path_tree()`: Constructs tree from algorithm results
-- `write_tree_to_file()`: Exports tree in graph format for visualization
+
+**Minimum Spanning Tree Functions:**
+- `kruskal_mst()`: Main MST algorithm implementation
+- `UnionFind`: Data structure for cycle detection
+- `print_mst()`: Formatted output and MST generation
 
 ## Testing the Algorithm
 
 ### Running with Sample Graphs
 
 ```bash
-# Run analysis with visualization
-python shortest_path.py
+# Run shortest path analysis
+python run_shortest_path.py
 
-# Change graph in main section to test different cases
-# Edit the graph_file variable in analyze_graph_and_visualize()
+# Run minimum spanning tree analysis
+python run_spanning_tree.py
+
+# Change graph files in main sections to test different cases
 ```
 
 ### Sample Test Cases
 
 1. **one.txt**: 6-vertex undirected graph, good for basic testing
-2. **two.txt**: 4-vertex directed graph with cycles
-3. **three.txt**: 6-vertex directed graph with multiple paths
+2. **two.txt**: 4-vertex directed graph with cycles (shortest path only)
+3. **three.txt**: 6-vertex directed graph with multiple paths (shortest path only)
 4. **four.txt**: 7-vertex undirected graph with varied weights
 
 ### Expected Output Format
 
+**Shortest Path Tree:**
 ```
 Shortest paths from A:
 A: 0 (A)
 B: 2 (A -> C -> B)
 C: 1 (A -> C)
 D: 3 (A -> C -> D)
-E: 4 (A -> C -> B -> E)
-F: 4 (A -> C -> D -> F)
-
-Shortest Path Tree:
-Tree edges: 5
-Tree vertices: 6
 ```
 
-The program also generates a shortest path tree file and displays visualizations of both the original graph and the resulting shortest path tree.
+**Minimum Spanning Tree:**
+```
+Minimum Spanning Tree:
+Total cost: 10
+Edges in MST:
+  A -- B : 2
+  B -- C : 1
+  C -- D : 2
+```
+
+Both programs generate output files and display visualizations of the original graph and resulting tree.
 
 ## Graph Visualization
 
-This project includes visualization capabilities using matplotlib and networkx. The program automatically displays both the original graph and the computed shortest path tree.
+The project includes visualization capabilities using matplotlib and networkx. Both programs automatically display the original graph and computed tree structures.

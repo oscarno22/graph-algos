@@ -112,7 +112,7 @@ def analyze_graph_and_visualize(graph_file):
         print("=" * 40)
 
         # write shortest path tree to file
-        tree_file = f"graphs/{graph_file.split("/")[-1].replace(".txt", "_shortest_paths.txt")}"
+        tree_file = f"graphs/{graph_file.split("/")[-1].replace(".txt", "_spt.txt")}"
         source = meta.get("source")
         write_tree_to_file(tree, tree_weights, meta, source, tree_file)
 
