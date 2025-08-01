@@ -1,7 +1,7 @@
 6 5 D
-D F 3
+B E 2
 A C 2
 A B 1
-B E 2
+D F 3
 C D 1
 source : A

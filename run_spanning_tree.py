@@ -99,5 +99,8 @@ def analyze_mst_and_visualize(graph_file):
 
 
 if __name__ == "__main__":
-    graph_file = "graphs/six.txt"
+    graph_file = "graphs/one.txt"
+    # graph_file = "graphs/four.txt"
+    # graph_file = "graphs/five.txt"
+    # graph_file = "graphs/six.txt"
     analyze_mst_and_visualize(graph_file)

@@ -95,9 +95,11 @@ Kruskal's algorithm finds the minimum spanning tree of an undirected weighted gr
 
 ```bash
 # Run shortest path analysis
+# works for all graphs (see __main__)
 python run_shortest_path.py
 
 # Run minimum spanning tree analysis
+# one.txt, four.txt, five.txt, six.txt (see __main__)
 python run_spanning_tree.py
 ```
 
@@ -135,4 +137,4 @@ Both programs generate output files and display visualizations of the original g
 
 ## Graph Visualization
 
-The project includes visualization capabilities using matplotlib and networkx. Both programs automatically display the original graph and computed tree structures.
+The project includes visualization capabilities using matplotlib and networkx. Both programs automatically display the original graph and computed tree structures. Note that one.txt displays slightly differently than what's shown on the assignment page, but the edges are the same (just a matter of positioning).
